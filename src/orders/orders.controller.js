@@ -169,13 +169,6 @@ function validateDestroy(req, res, next) {
 function destroy(req, res, next) {
   const index = orders.findIndex((order) => order.id === res.locals.orderId);
 
-  if (res.locals.foundOrder.status !== "pending") {
-    return next({
-      status: 400,
-      message: `Cannot remove order that is not in pending.`,
-    });
-  }
-
   if (index > -1) {
     orders.splice(index, 1);
     res.sendStatus(204);
